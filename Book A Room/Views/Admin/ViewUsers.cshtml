@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Book_A_Room.Models.ApplicationUser>
+@{
+    ViewBag.Title = "ViewUsers";
+    Layout = "~/Views/Shared/TopBarForAdmin.cshtml";
+}
+<h2>Our Users</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayName("Action")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    { 
+        <tr>
+            <td>
+
+                @if (item.Email != "SystemAdmin@usal.edu.lb")
+                { 
+                    @Html.DisplayFor(modelItem => item.Email)
+                }
+            </td>
+            <td>
+                @if (item.Email != "SystemAdmin@usal.edu.lb")
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

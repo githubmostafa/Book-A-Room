@@ -1,0 +1,65 @@
+﻿@model Book_A_Room.ViewModels.NewUserRole
+@{
+    ViewBag.Title = "AddUser";
+    Layout = "~/Views/Shared/TopBarForAdmin.cshtml";
+}
+
+<h2>Add User</h2>
+
+@using (Html.BeginForm("AddUserToDB", "Admin"))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.registerViewModel.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.registerViewModel.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.registerViewModel.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.registerViewModel.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.registerViewModel.Password, new { htmlAttributes = new
+       {
+           @class = "form-control",
+           placeholder = "S@s123456",
+           @readonly = "true"
+       } })
+            @Html.ValidationMessageFor(model => model.registerViewModel.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.registerViewModel.RoleID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.registerViewModel.RoleID, new SelectList(Model.roles, "Id", "Name"),
+            "Select Role", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.registerViewModel.RoleID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+   
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+    }
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

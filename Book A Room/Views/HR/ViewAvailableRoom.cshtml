@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Book_A_Room.Models.AvailableRoom>
+
+@{
+    ViewBag.Title = "Available Room";
+    Layout = "~/Views/Shared/TopBarForHR.cshtml";
+}
+
+<h2>ViewAvailableRoom</h2>
+
+<p>
+    @Html.ActionLink("Add A Booking Room", "AvailableRoomsForm", "HR", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.room.RoomName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.BeginTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.room.RoomName)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.BeginTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.AvailableRoomId }) 
+                @Html.ActionLink("Delete", "DeleteAvailableRoom", new { id = item.AvailableRoomId })
+            </td>
+        </tr>
+    }
+
+</table>

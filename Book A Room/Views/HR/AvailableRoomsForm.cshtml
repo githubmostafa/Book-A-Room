@@ -1,0 +1,71 @@
+﻿@model Book_A_Room.ViewModels.NewRoom
+
+@{
+    ViewBag.Title = "AvailableRoomsForm";
+    Layout = "~/Views/Shared/TopBarForHR.cshtml";
+}
+
+<h2>AvailableRoomsForm</h2>
+
+@using (Html.BeginForm("AddAvailableRoomToDb", "HR"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>AvailableRoom</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.availableRoom.BeginTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.availableRoom.BeginTime, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control",
+                   
+                   type = "datetime-local"
+
+               }
+           })
+                @Html.ValidationMessageFor(model => model.availableRoom.BeginTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.availableRoom.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.availableRoom.EndTime, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control",
+                  
+                        type = "datetime-local"
+               }
+           })
+                @Html.ValidationMessageFor(model => model.availableRoom.EndTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.availableRoom.RoomId, "RoomId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.availableRoom.RoomId, new SelectList(Model.rooms_, "RoomId", "RoomName"), "Select Room", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.availableRoom.RoomId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>
+
+

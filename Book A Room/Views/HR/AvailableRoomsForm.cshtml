@@ -49,10 +49,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.availableRoom.RoomId, "RoomId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.availableRoom.room.RoomId, "RoomId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.availableRoom.RoomId, new SelectList(Model.rooms_, "RoomId", "RoomName"), "Select Room", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.availableRoom.RoomId, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.availableRoom.room.RoomId, new SelectList(Model.rooms_, "RoomId", "RoomName"), "Select Room", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.availableRoom.room.RoomId, "", new { @class = "text-danger" })
             </div>
         </div>
 

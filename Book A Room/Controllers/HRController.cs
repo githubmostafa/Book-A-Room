@@ -1,5 +1,6 @@
 ﻿using Book_A_Room.Models;
 using Book_A_Room.ViewModels;
+using System;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
@@ -59,7 +60,7 @@ namespace Book_A_Room.Controllers
 
                 }
             }
-            return View("ViewRooms", "HR");
+            return RedirectToAction("ViewRooms", "HR");
         }
 
         //View Form To Add A Rooms
@@ -121,7 +122,7 @@ namespace Book_A_Room.Controllers
             }
 
             return RedirectToAction("ViewItems","HR");
-        }
+        } 
         //Delete Item
 
         public ActionResult DeleteItem(int ID)
@@ -134,11 +135,11 @@ namespace Book_A_Room.Controllers
                     var item = db.items.Where(t => t.ItemId == ID).FirstOrDefault();
                     db.items.Remove(item);
                     db.SaveChanges();
-                    RedirectToAction("Views/HR/ViewItems.cshtml");
+                    RedirectToAction("ViewItems", "HR");
 
                 }
             }
-            return View("ViewItems", "HR");
+            return RedirectToAction("ViewItems", "HR");
         }
 
         /// ////////////////////////////////////////////////////////////////////
@@ -169,8 +170,16 @@ namespace Book_A_Room.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.availableRooms.Add(available);
-                db.SaveChanges();
+                try
+                {
+                    db.availableRooms.Add(available);
+                    db.SaveChanges();
+                }catch(Exception ex)
+                {
+                  
+                }
+
+
             }
             return View("ViewAvailableRoom","HR");
         }
